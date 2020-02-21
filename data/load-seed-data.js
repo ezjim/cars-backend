@@ -2,7 +2,9 @@ equire('dotenv').config();
 const pg = require('pg');
 const Client = pg.Client;
 // import seed data:
-const data = require('../data/data.js');
+
+//check this line out forsure.
+// const data = require('../data/data.js');
 
 run();
 
@@ -16,6 +18,7 @@ async function run() {
         await Promise.all(
             // map every item in the array data
             data.map(item => {
+///now im not sure if we aractually pulling data from local or if it is working
 
                 // Use a "parameterized query" to insert the data,
                 // Don't forget to "return" the client.query promise!
