@@ -8,7 +8,7 @@
 //     is_sidekick BOOLEAN NOT NULL
 // );
 
-// INSERT INTO cats (name, genre, url, year, lives, is_sidekick)
+// INSERT INTO cats (name, genre, url, year, rating, is_fresh)
 // VALUES ('FEAR', 'jellicle', 'www.placekitten.com/300/300', 1987, 2, true);
 
 // 1 name
@@ -37,9 +37,9 @@ module.exports = [
     },
     {
         name: 'Four Brothers',   
-        genre: 'Drama',
+        genre: 'Action',
         img: 0,
-        year: 'Action',
+        year: '2005',
         rating: 'R',
         fresh: 'Rotten',
     },
@@ -60,12 +60,12 @@ module.exports = [
         fresh: 'True',
     },
     {
-        name: 'Boogie Nights',   
-        genre: 'Drama',
+        name: 'Daddys Home',   
+        genre: 'Comedy',
         img: 0,
-        year: '1997',
+        year: '2015',
         rating: 'R',
-        fresh: 'True',
+        fresh: 'false',
     },
     {
         name: 'The Figher',   
