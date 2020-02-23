@@ -1,10 +1,9 @@
-equire('dotenv').config();
+require('dotenv').config();
 const pg = require('pg');
 const Client = pg.Client;
-// import seed data:
-
-//check this line out forsure.
-// const data = require('../data/data.js');
+// import our seed data:
+const types = require('./types.js');
+const movies = require('./data.js');
 
 run();
 
@@ -13,16 +12,46 @@ async function run() {
 
     try {
         await client.connect();
-    
-        // "Promise all" does a parallel execution of async tasks
-        await Promise.all(
-            // map every item in the array data
-            data.map(item => {
-///now im not sure if we aractually pulling data from local or if it is working
 
-                // Use a "parameterized query" to insert the data,
-                // Don't forget to "return" the client.query promise!
-                
+        // First save types and get each returned row which has
+        // the id of the type. Notice use of RETURNING:
+        const savedTypes = await Promise.all(
+            types.map(async type => {
+                const result = await client.query(`
+                    INSERT INTO types (type)
+                    VALUES ($1)
+                    RETURNING *;
+                `,
+                    [type]);
+
+
+                return result.rows[0];
+            
+            })
+        );
+
+  
+        console.log(types)
+
+        // map every item in the array
+        await Promise.all(
+            
+
+            movies.map(movie => {
+                // Find the corresponding type id
+                // find the id of the matching cat type
+                const type = savedTypes.find(type => {
+                    console.log('type.type');
+                    console.log(movies.type);
+                    return type.name === movie.type;
+                });
+
+                return client.query(`
+                    INSERT INTO movies (name, type, img, year, rating, is_fresh)
+                    VALUES ($1, $2, $3, $4, $5, $6);
+                `,
+                    [movie.name, type.id, movie.url, movie.year, movie.rating, movie.isFresh]);
+
             })
         );
 
@@ -34,5 +63,5 @@ async function run() {
     finally {
         client.end();
     }
-    
+
 }
