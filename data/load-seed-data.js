@@ -36,21 +36,21 @@ async function run() {
         // map every item in the array
         await Promise.all(
             
-
             movies.map(movie => {
                 // Find the corresponding type id
                 // find the id of the matching cat type
                 const type = savedTypes.find(type => {
-                    console.log('type.type');
-                    console.log(movies.type);
+                    console.log('what movie type');
+                    console.log(movie); 
+                    debugger;
                     return type.name === movie.type;
                 });
 
                 return client.query(`
-                    INSERT INTO movies (name, type, img, year, rating, is_fresh)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    INSERT INTO movies (id, name, type, img, year, rating, fresh)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7);
                 `,
-                    [movie.name, type.id, movie.url, movie.year, movie.rating, movie.isFresh]);
+                    [movie.id, movie.name, movie.type, movie.img, movie.year, movie.rating, movie.fresh]);
 
             })
         );
@@ -58,6 +58,7 @@ async function run() {
         console.log('seed data load complete');
     }
     catch (err) {
+        console.log('this is an error =====================');
         console.log(err);
     }
     finally {

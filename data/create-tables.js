@@ -29,10 +29,10 @@ async function run() {
                 id SERIAL PRIMARY KEY NOT NULL,
                 name VARCHAR(256) NOT NULL,
                 type VARCHAR(256) NOT NULL,
-                img VARCHAR(256) NOT NULL,
+                img INTEGER NOT NULL,
                 year INTEGER NOT NULL,
                 rating VARCHAR(256) NOT NULL,
-                is_fresh BOOLEAN NOT NULL
+                fresh BOOLEAN NOT NULL
             );
         `);
 // await client.query(`
