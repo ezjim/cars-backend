@@ -21,13 +21,13 @@ app.use(cors()); // enable CORS request
 
 // API Routes
 
-app.get('/data', async(req, res) => {
+app.get('/data', async (req, res) => {
     try {
         const result = await client.query(`
-            SELECT * FROM markys;
+            SELECT * FROM movies;
               
                 `);
-                // CHECK WHAT CATS MEANS FOR WHAT VAR 
+        // CHECK WHAT CATS MEANS FOR WHAT VAR 
         console.log(result.rows);
 
         res.json(result.rows);
