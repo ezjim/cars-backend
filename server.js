@@ -38,6 +38,47 @@ app.get('/data', async (req, res) => {
     }
 });
 
+app.get('/api/cat/:myCatId', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT *
+            FROM cats
+            WHERE cats.id=$1`,
+            // the second parameter is an array of values to be SANITIZED then inserted into the query
+            // i only know this because of the `pg` docs
+            [req.params.myCatId]);
+
+        res.json(result.rows);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+
+app.get('/data/:movieId', async (req, res) => {
+    try {
+        const result = await client.query(`
+            SELECT *
+            FROM movies
+            WHERE movies.id=$1`,
+            // the second parameter is an array of values to be SANITIZED then inserted into the query
+            // i only know this because of the `pg` docs
+            [req.params.moviesId]);
+
+        res.json(result.rows);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+
+
+
+
 // Start the server
 app.listen(PORT, () => {
     console.log('server running on PORT', PORT);
