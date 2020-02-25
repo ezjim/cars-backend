@@ -18,7 +18,10 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(morgan('dev')); // http logging
 app.use(cors()); // enable CORS request
-
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));
 // API Routes
 //FULL LIST OF MOVIES
 app.get('/data', async (req, res) => {
@@ -36,25 +39,22 @@ app.get('/data', async (req, res) => {
         });
     }
 });
-      
+
 
 // movie and types tables           are our tables jointed???///////////
 app.get('/data/:moviesId', async (req, res) => {
     try {
         const result = await client.query(`
-        SELECT m.*,
-        m.type as type
-        from movies m
-        join types t
-        on m.type = t.type
-        order by m.id`,
-        // SELECT movies.*, types.name AS type
-        // FROM movies 
-        // JOIN types
-        // ON movies.type = types.id;`);
-        [req.params.moviesId]);
+        SELECT *
+        FROM movies
+        WHERE movies.id=$1`,
+            // SELECT movies.*, types.name AS type
+            // FROM movies 
+            // JOIN types
+            // ON movies.type = types.id;`);
+            [req.params.moviesId]);
         res.json(result.rows);
-        
+
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -68,8 +68,7 @@ app.get('/data/types', async (req, res) => {
         const result = await client.query(`SELECT * FROM types ORDER by name;`);
 
         res.json(result.rows);
-    }
-    catch (err) {
+    } catch (err) {
         res.status(500).json({
             error: err.message || err
         });
@@ -89,10 +88,9 @@ app.put('/data', async (req, res) => {
             img = '${req.body.img}',
             year = '${req.body.year}', 
             rating = '${req.body.rating}', 
-            fresh = '${req.body.fresh}', 
+            fresh = '${req.body.fresh}' 
             WHERE id = ${req.body.id};
-        `, 
-        );
+        `, );
 
         res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
@@ -104,19 +102,21 @@ app.put('/data', async (req, res) => {
 });
 
 //POST to the movies table
-app.post(`/data`, async (req, res) => {
+app.post('/data', async (req, res) => {
     try {
+        console.log(req);
+
         const result = await client.query(`
         INSERT INTO movies (name, type, img, year, rating, fresh)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    VALUES ($1, $2, $3, $4, $5, $6)
                         RETURNING *; 
-                        `, 
-        [req.movie.name, req.movie.type, req.movie.img, req.movie.year, req.movie.rating, req.movie.fresh] 
-        );   
+                        `,
+            [req.body.name, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
+        );
+
 
         res.json(result.rows[0]); // return just the first result of our query
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err.message || err
@@ -125,14 +125,13 @@ app.post(`/data`, async (req, res) => {
 });
 
 // DELETE 
-app.delete('/data/:movieId', async (req, res) => {
+app.delete('/data/:movieId', async(req, res) => {
     try {
         const result = await client.query(`
         DELETE FROM movies where id = ${req.params.movieId} 
         `);
         res.json(result.rows);
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err.message || err
@@ -150,3 +149,11 @@ app.listen(PORT, () => {
 
 
 // module.exports = { app, };
+
+
+// SELECT m.*,
+// m.type as type
+// from movies m
+// join types t
+// on m.type = t.type
+// order by m.id`,
