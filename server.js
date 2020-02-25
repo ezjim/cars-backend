@@ -47,9 +47,34 @@ app.get('/data/:moviesId', async (req, res) => {
             WHERE movies.id=$1`,
             // the second parameter is an array of values to be SANITIZED then inserted into the query
             // i only know this because of the `pg` docs
-        [req.params.moviesId]);
+            [req.params.moviesId]);
 
         res.json(result.rows);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err.message || err
+        });
+    }
+});
+app.put('/data', async (req, res) => {
+    // using req.body instead of req.params or req.query (which belong to /GET requests)
+    try {
+        console.log(req.body);
+        // make a new cat out of the cat that comes in req.body;
+        const result = await client.query(`
+            UPDATE movies
+            SET name = '${req.body.name}', 
+            type = '${req.body.type}'
+            img = '${req.body.img}',
+            year = '${req.body.year}', 
+            rating = '${req.body.rating}', 
+            fresh = '${req.body.fresh}', 
+            WHERE id = ${req.body.id};
+        `, 
+        );
+
+        res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
         console.log(err);
         res.status(500).json({
