@@ -42,12 +42,9 @@ app.get('/data', async (req, res) => {
 app.get('/data/:moviesId', async (req, res) => {
     try {
         const result = await client.query(`
-        SELECT m.*,
-        m.type as type
-        from movies m
-        join types t
-        on m.type = t.type
-        order by m.id`,
+        SELECT *
+        FROM movies
+        WHERE movies.id=$1`,
         // SELECT movies.*, types.name AS type
         // FROM movies 
         // JOIN types
@@ -150,3 +147,11 @@ app.listen(PORT, () => {
 
 
 // module.exports = { app, };
+
+
+// SELECT m.*,
+// m.type as type
+// from movies m
+// join types t
+// on m.type = t.type
+// order by m.id`,
