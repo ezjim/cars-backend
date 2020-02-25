@@ -22,7 +22,7 @@ async function run() {
                     VALUES ($1)
                     RETURNING *;
                 `,
-                    [type]);
+                [type]);
 
 
                 return result.rows[0];
@@ -42,15 +42,15 @@ async function run() {
                 const type = savedTypes.find(type => {
                     console.log('what movie type');
                     console.log(movie); 
-                    debugger;
+                    
                     return type.name === movie.type;
                 });
 
                 return client.query(`
-                    INSERT INTO movies (id, name, type, img, year, rating, fresh)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7);
+                    INSERT INTO movies (name, type, img, year, rating, fresh)
+                    VALUES ($1, $2, $3, $4, $5, $6);
                 `,
-                    [movie.id, movie.name, movie.type, movie.img, movie.year, movie.rating, movie.fresh]);
+                [movie.name, movie.type, movie.img, movie.year, movie.rating, movie.fresh]);
 
             })
         );
