@@ -19,7 +19,7 @@ const PORT = process.env.PORT;
 app.use(morgan('dev')); // http logging
 app.use(cors()); // enable CORS request
 app.use(express.json());
-app.use(express.urlendcoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 // API Routes
 //FULL LIST OF MOVIES
 app.get('/data', async(req, res) => {
