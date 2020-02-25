@@ -85,9 +85,9 @@ app.put('/data', async (req, res) => {
             img = '${req.body.img}',
             year = '${req.body.year}', 
             rating = '${req.body.rating}', 
-            fresh = '${req.body.fresh}', 
+            fresh = '${req.body.fresh}' 
             WHERE id = ${req.body.id};
-        `, );
+        `,);
 
         res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
@@ -106,7 +106,7 @@ app.post('/data', async (req, res) => {
                     VALUES ($1, $2, $3, $4, $5, $6);
                         RETURNING *; 
                         `,
-        [req.body.name, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
+        [req.body, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
         );
        
 
