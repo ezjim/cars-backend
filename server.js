@@ -99,8 +99,10 @@ app.put('/data', async (req, res) => {
 });
 
 //POST to the movies table
-app.post('/data', async (req, res) => {
+app.post('/data', async(req, res) => {
     try {
+        console.log(req.body);
+        
         const result = await client.query(`
         INSERT INTO movies (name, type, img, year, rating, fresh)
                     VALUES ($1, $2, $3, $4, $5, $6);
