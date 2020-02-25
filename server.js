@@ -108,7 +108,7 @@ app.post('/data', async (req, res) => {
 
         const result = await client.query(`
         INSERT INTO movies (name, type, img, year, rating, fresh)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    VALUES ($1, $2, $3, $4, $5, $6)
                         RETURNING *; 
                         `,
             [req.body.name, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
