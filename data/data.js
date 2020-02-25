@@ -21,7 +21,7 @@ module.exports = [{
 
     name: 'FEAR',
     type: 'thriller',
-    img: 0,
+    img: 'https://img.moviepostershop.com/fear-movie-poster-1996-1020209188.jpg',
     year: '1996',
     rating: 'R',
     fresh: 'true',
