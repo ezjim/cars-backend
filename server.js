@@ -108,6 +108,7 @@ app.post(`/data`, async (req, res) => {
                         `,
             [req.body.name, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
         );
+        console.log(req.body, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafuck') ;
 
         res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
