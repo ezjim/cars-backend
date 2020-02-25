@@ -1,10 +1,10 @@
 module.exports = [
 
-'action',
-'comedy',
-'drama',
-'sci-fi',
-'thriller'
+    'action',
+    'comedy',
+    'drama',
+    'sci-fi',
+    'thriller'
    
 ];
 

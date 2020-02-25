@@ -125,7 +125,7 @@ app.post('/data', async (req, res) => {
 });
 
 // DELETE 
-app.delete('/data/:movieId', async (req, res) => {
+app.delete('/data/movieArray/:movieId', async (req, res) => {
     try {
         const result = await client.query(`
         DELETE FROM movies where id = ${req.params.movieId} 
