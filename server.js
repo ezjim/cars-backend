@@ -106,7 +106,7 @@ app.post('/data', async (req, res) => {
                     VALUES ($1, $2, $3, $4, $5, $6);
                         RETURNING *; 
                         `,
-        [req.body, req.body.type, req.body.img, req.body.year, req.body.rating, req.body.fresh]
+        [res.body.name, res.body.type, res.body.img, res.body.year, res.body.rating, res.body.fresh]
         );
        
 
