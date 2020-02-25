@@ -21,7 +21,7 @@ module.exports = [{
 
     name: 'FEAR',
     type: 'thriller',
-    img: 'https://img.moviepostershop.com/fear-movie-poster-1996-1020209188.jpg',
+    url: 'https://img.moviepostershop.com/fear-movie-poster-1996-1020209188.jpg',
     year: '1996',
     rating: 'R',
     fresh: 'true',
@@ -30,7 +30,7 @@ module.exports = [{
 
     name: 'Boogie Nights',
     type: 'drama',
-    img: 0,
+    url: 'https://images-na.ssl-images-amazon.com/images/I/51UUpxhXNQL._AC_.jpg',
     year: '1997',
     rating: 'R',
     fresh: 'true',
@@ -39,7 +39,7 @@ module.exports = [{
 
     name: 'Four Brothers',
     type: 'action',
-    img: 0,
+    url: 'https://images-na.ssl-images-amazon.com/images/I/51918o0ijbL._AC_.jpg',
     year: '2005',
     rating: 'R',
     fresh: 'false',
@@ -48,7 +48,7 @@ module.exports = [{
 
     name: 'The Departed',
     type: 'drama',
-    img: 0,
+    url: 'https://i.pinimg.com/originals/49/f4/04/49f40426a15245fcbf458e1787af16c6.jpg',
     year: '2006',
     rating: 'R',
     fresh: 'true',
@@ -57,7 +57,7 @@ module.exports = [{
 
     name: 'Ted',
     type: 'comedy',
-    img: 0,
+    url: 'https://images-na.ssl-images-amazon.com/images/I/61hYEm-udhL._AC_SY879_.jpg',
     year: '2012',
     rating: 'R',
     fresh: 'true',
@@ -66,7 +66,7 @@ module.exports = [{
 
     name: 'Daddys Home',
     type: 'comedy',
-    img: 0,
+    url: 'https://m.media-amazon.com/images/M/MV5BMTQ0OTE1MTk4N15BMl5BanBnXkFtZTgwMDM5OTk5NjE@._V1_.jpg',
     year: '2015',
     rating: 'R',
     fresh: 'false',
@@ -75,7 +75,7 @@ module.exports = [{
 
     name: 'The Figher',
     type: 'drama',
-    img: 0,
+    url: 'https://images-na.ssl-images-amazon.com/images/I/51ok-STZZ0L._AC_.jpg',
     year: '2010',
     rating: 'R',
     fresh: 'true',
@@ -84,7 +84,7 @@ module.exports = [{
 
     name: 'Other Guys',
     type: 'comedy',
-    img: 0,
+    url: 'https://images-na.ssl-images-amazon.com/images/I/513CtTKWNvL._AC_.jpg',
     year: '2010',
     rating: 'R',
     fresh: 'true',
