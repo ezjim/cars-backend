@@ -18,10 +18,11 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(morgan('dev')); // http logging
 app.use(cors()); // enable CORS request
-
+app.use(express.json());
+app.use(express.urlendcoded({ extended: true }));
 // API Routes
 //FULL LIST OF MOVIES
-app.get('/data', async (req, res) => {
+app.get('/data', async(req, res) => {
     try {
         const result = await client.query(`
             SELECT * FROM movies;
@@ -87,7 +88,7 @@ app.put('/data', async (req, res) => {
             rating = '${req.body.rating}', 
             fresh = '${req.body.fresh}' 
             WHERE id = ${req.body.id};
-        `,);
+        `, );
 
         res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
@@ -99,18 +100,18 @@ app.put('/data', async (req, res) => {
 });
 
 //POST to the movies table
-app.post('/data', async(req, res) => {
+app.post('/data', async (req, res) => {
     try {
         console.log(req.body);
-        
+
         const result = await client.query(`
         INSERT INTO movies (name, type, img, year, rating, fresh)
                     VALUES ($1, $2, $3, $4, $5, $6);
                         RETURNING *; 
                         `,
-        [res.body.name, res.body.type, res.body.img, res.body.year, res.body.rating, res.body.fresh]
+            [res.body.name, res.body.type, res.body.img, res.body.year, res.body.rating, res.body.fresh]
         );
-       
+
 
         res.json(result.rows[0]); // return just the first result of our query
     } catch (err) {
